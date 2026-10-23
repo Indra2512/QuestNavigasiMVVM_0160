@@ -5,7 +5,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.navigation.view.FormIsian
 import com.example.navigation.view.TampilData
@@ -17,7 +19,7 @@ enum class  Navigasi {
 
 @Composable
 fun DataApp(
-    navController: NavController = rememberNavController()
+    navController: NavHostController = rememberNavController()
 ){
     Scaffold { isiRuang ->
         NavHost(
@@ -35,10 +37,15 @@ fun DataApp(
             }
             composable(route = Navigasi.Detail.name){
                 TampilData(
-                    onBackBtnClick = {cancelAndBackToFormulirSaya
-                        (navController)}
+                    onBackBtnClick = {cancelAndBackToFormulirSaya(navController)}
                 )
             }
         }
     }
+}
+private fun cancelAndBackToFormulirSaya(
+    navController: NavController
+) {
+    navController.popBackStack(Navigasi.FormulirSaya.name, inclusive =
+        false)
 }
