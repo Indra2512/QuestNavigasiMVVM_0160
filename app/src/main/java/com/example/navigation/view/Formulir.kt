@@ -1,12 +1,13 @@
 package com.example.navigation.view
+import android.R.attr.thickness
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.DividerDefaults.Thickness
@@ -27,19 +28,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.navigation.R
 
-@OptIn(ExperimentalMaterial3Api::class)
+
+@OptIn(ExperimentalStdlibApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun FormIsian(
-    jenisK:List<String> = listOf("laki-laki", "Perempuan"),
-    OnSubmitBtnClick : () -> Unit
-){
-    Scaffold (modifier = Modifier,
+    jenisK: List<String> = listOf("Laki-laki", "Perempuan"),
+    OnSubmitBtnClick: () -> Unit
+) {
+    Scaffold(modifier = Modifier,
         {
             TopAppBar(
-                title = { Text(stringResource(id = R.string.home), color = Color.White)},
+                title = {Text(stringResource(R.string.home), color = Color.White)},
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    colorResource(id = R.color.teal_700))
-            )}
+                    colorResource(R.color.teal_700)
+                ))}
     ){isiRuang ->
         Column(modifier = Modifier.padding(isiRuang),
             verticalArrangement = Arrangement.Top,
@@ -49,20 +51,20 @@ fun FormIsian(
                 singleLine = true,
                 modifier = Modifier
                     .padding(top = 20.dp)
-                    .padding(250.dp),
+                    .width(250.dp),
                 label = {Text(text = "Nama Lengkap")},
                 onValueChange = {},
             )
             HorizontalDivider(modifier = Modifier
                 .padding(20.dp)
-                .width(250.dp), thickness = Thickness, color = Color.Red)
+                .width(250.dp), thickness = Thickness,color = Color.Red)
             Row{
                 jenisK.forEach {
-                    item ->
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        item->
+                    Row(verticalAlignment = Alignment.CenterVertically){
                         RadioButton(
                             selected = false,
-                            onClick = {item}
+                            onClick = {item},
                         )
                         Text(text = item)
                     }
@@ -86,10 +88,12 @@ fun FormIsian(
             Button(
                 modifier = Modifier.fillMaxWidth(1f)
                     .padding(all = 25.dp),
-                onClick = OnSubmitBtnClick
+                onClick = { OnSubmitBtnClick() }
             ) {
+
                 Text(stringResource(id = R.string.submit))
             }
+
         }
     }
 }

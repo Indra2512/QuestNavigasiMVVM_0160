@@ -22,6 +22,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             NavigationTheme {
                 Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
                 ){
                     DataApp()
                 }
